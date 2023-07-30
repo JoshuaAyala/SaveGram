@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SaveGram</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/413325b7ce.js"
+            crossorigin="anonymous"></script>
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+            *{
+                padding: 0;
+                margin: 0;
+                font-family: 'Ubuntu', sans-serif;
+                max-width: 100%;
+            }
+
+            body{
+                width: 100%;
+                background-color: #17191f;
+                color: white;
+            }
+
+            nav{
+                background: #17191f;
+                width: 100%;
+                box-shadow: 0px 0px 1px rgba(255, 255, 255, 0.205);
+            }
+
+            nav img{
+                max-width: 30px;
+            }
+
+            nav ul{
+                text-align: center;
+            }
+
+            nav ul li{
+                
+                display: inline-block;
+                padding: 20px 0px 20px 0px;
+                color: white;
+                font-style: bold;
+                font-size: 1.5em;
+            }
+
+            #logo{
+                max-width: 35px;
+                margin-right: 5px;
+            }
+
+            main{
+                vertical-align: middle;
+                text-align: center;
+                width: 100%;
+                margin-left: 0;
+            }
+
+            #basic-addon1{
+                background: #353b48;
+            }
+
+            .input-download{
+                background: #353b48;
+                border-radius: 6px;
+                -webkit-border-radius: 6px;
+                -moz-border-radius: 6px;
+                -ms-border-radius: 6px;
+                -o-border-radius: 6px;
+                padding: 10px 15px;
+                width: 100px;
+                vertical-align: middle;
+                text-align: center;
+                text-decoration: none;
+                color: white;
+            }
+
+            .card-purple{
+                background: #353b48;
+                border-radius: 5px;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                -ms-border-radius: 5px;
+                -o-border-radius: 5px;
+                max-width: 80%;
+            }
+
+            .user-info {
+                text-align: center;
+                margin-bottom: 30px;
+            }
+
+            .user-info img {
+                margin-top: 40px;
+                width: 50px;
+                height: 50px;
+                object-fit: cover;
+                border-radius: 50%;
+                margin-bottom: 10px;
+            }
+
+            .user-username {
+                color: white;
+                font-size: 14px;
+                margin-bottom: 15px;
+            }
+
+            .card{
+                border: none;
+                background-color: rgba(117, 48, 227, 0);
+                margin-bottom: 20px;
+                
+            }
+
+            .card-body{
+                vertical-align: middle;
+                text-align: center;
+                color: white;
+                background-color: #1c1f25;
+                border-end-start-radius: 10px;
+                border-end-end-radius: 10px;
+                padding: 10px 0px 0px 0px;
+            }
+
+            .card img{
+                width: 100%;
+                border-start-start-radius: 10px;
+                border-start-end-radius: 10px;
+            }
+
+            #content-container{
+                display: none;
+            }
+            .lds-ripple {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                width: 80px;
+                height: 80px;
+            }
+            .lds-ripple div {
+                position: absolute;
+                border: 4px solid #fff;
+                opacity: 1;
+                border-radius: 50%;
+                animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+            }
+            .lds-ripple div:nth-child(2) {
+                animation-delay: -0.5s;
+            }
+            @keyframes lds-ripple {
+                0% {
+                    top: 36px;
+                    left: 36px;
+                    width: 0;
+                    height: 0;
+                    opacity: 0;
+                }
+                4.9% {
+                    top: 36px;
+                    left: 36px;
+                    width: 0;
+                    height: 0;
+                    opacity: 0;
+                }
+                5% {
+                    top: 36px;
+                    left: 36px;
+                    width: 0;
+                    height: 0;
+                    opacity: 1;
+                }
+                100% {
+                    top: 0px;
+                    left: 0px;
+                    width: 72px;
+                    height: 72px;
+                    opacity: 0;
+                }
+            }
+            footer {
+                background-color: #353b48;
+                color: white;
+                padding: 20px 0px 00px 0px;
+                text-align: center;
+            }
+            .footer-text {
+                font-size: 14px;
+            }
+            .disclaimer-section {
+                padding: 50px 0;
+            }
+            .terms-section {
+                padding: 50px 0;
+            }
+            .terms-content {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            #error-message{
+                padding: 30px;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li>
+                    <img id="logo" src="/templates/logo-gramsaver.png" alt>
+                </li>
+                <li>SaveGram</li>
+            </ul>
+        </nav>
+        <main>
+            <div class="col">
+                <div class="row">
+                    <p>Descarga contenido de Instagram</p>
+                </div>
+                <center>
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <span style="color: white;" class="input-group-text"
+                                id="basic-addon1">@</span>
+                            <input type="text" class="form-control"
+                                placeholder="Introduce usuario de instagram"
+                                aria-label="username"
+                                id="username-input"
+                                aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <center>
+                            <a class="input-download" id
+                                onclick="downloadImages()">Descargar</a>
+                        </center>
+                    </div>
+                    <div class="row"
+                        style="margin-top: 20px; font-size: 14px;">
+                        <p>Descargas ilimitadas.<br>Guarda tantas imagenes
+                            como<br>necesites, sin limites.</p>
+                    </div>
+                </center>
+                <div id="content-container" class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-sm-6 col-md-4">
+                            <center>
+                                <div class="card-purple">
+                                    <div class="lds-ripple">
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                    <div id="error-message" class
+                                        style="display: none;"></div>
+                                    <div class="card-body-purple">
+                                        <div class="user-info">
+                                            <img
+                                                id="profilepic"
+                                                alt="Foto del Usuario">
+                                            <p class="user-username"></p>
+                                        </div>
+                                        <div id="user-content">
+                                            <template id="templatepost">
+                                                <div
+                                                    class="row d-flex justify-content-center">
+                                                    <div class="card"
+                                                        style="width: 18rem;">
+                                                        <img
+                                                            class="card-img-top"
+                                                            alt="...">
+                                                        <div class="card-body">
+                                                            <p>Descargar</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+                <section class="container mt-5">
+                    <div class="row justify-content-center">
+                        <div
+                            class="col-md-6 text-center container-instrucciones">
+                            <i class="fas fa-info-circle fa-4x mb-3"
+                                style="font-size: 40px;"></i>
+                            <h2 class="mb-4">Instrucciones</h2>
+
+                            <div class="mb-4">
+                                <h5>Paso 1: Introduce el username</h5>
+                                <p>Ingresa el nombre de usuario de la cuenta de
+                                    Instagram en el campo necesario.</p>
+                            </div>
+                            <div class="mb-4">
+                                <h5>Paso 2: Da clic al botón Descargar</h5>
+                                <p>Una vez ingresado el nombre de usuario,
+                                    presiona el botón "Descargar" para obtener
+                                    las imágenes
+                                    del perfil.</p>
+                            </div>
+
+                            <div class="mt-4">
+                                <h5>Paso 3: Descarga individual de imágenes</h5>
+                                <p>Después de que se muestren las imágenes del
+                                    perfil, puedes dar clic en el botón
+                                    "Descargar" de
+                                    cada imagen para guardarlas en tu
+                                    dispositivo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="disclaimer-section">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <i
+                                    class="fa-solid fa-triangle-exclamation fa-4x mb-3"
+                                    style="font-size: 40px;"></i>
+                                <h2>Disclaimer</h2>
+                                <p>SaveGram es una herramienta desarrollada de
+                                    forma independiente y no tiene ninguna
+                                    afiliación con Instagram. Esta aplicación se
+                                    proporciona "tal cual" y no nos hacemos
+                                    responsables del uso que le des a la
+                                    herramienta.</p>
+                                <p>Es importante que cumplas con las políticas y
+                                    términos de uso de Instagram al utilizar
+                                    esta aplicación. El contenido descargado es
+                                    responsabilidad del usuario y no estamos
+                                    asociados con el contenido descargado o
+                                    compartido a través de SaveGram.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Términos de Uso y Condiciones -->
+                <section class="terms-section">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <i class="fa-solid fa-file-signature fa-4x mb-3"
+                                    style="font-size: 40px;"></i>
+                                <h2>Términos de Uso y Condiciones</h2>
+                                <div class="terms-content">
+                                    <p>Al utilizar la aplicación SaveGram,
+                                        aceptas cumplir con los siguientes
+                                        términos de uso:</p>
+                                    <ul>
+                                        <li>La aplicación se proporciona para
+                                            uso personal y no comercial.</li>
+                                        <li>No debes utilizar la aplicación para
+                                            descargar contenido con derechos de
+                                            autor o que infrinja los derechos de
+                                            propiedad intelectual de terceros.</li>
+                                        <li>Entiendes que el contenido
+                                            descargado a través de la aplicación
+                                            es responsabilidad tuya y que debes
+                                            cumplir con todas las políticas y
+                                            términos de uso de Instagram.</li>
+                                        <li>No nos hacemos responsables de
+                                            ninguna pérdida de datos o daño
+                                            causado por el uso de la aplicación.</li>
+                                        <li>Nos reservamos el derecho de
+                                            modificar o suspender la aplicación
+                                            en cualquier momento sin previo
+                                            aviso.</li>
+                                    </ul>
+                                    <p>Al utilizar SaveGram, aceptas estos
+                                        términos y condiciones. Si no estás de
+                                        acuerdo con ellos, por favor no utilices
+                                        la aplicación.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <script>
+            function downloadImages() {
+                const imageCardTemplate = document.getElementById('templatepost');
+                document.getElementById('content-container').style.display = 'block';
+                const username = document.getElementById('username-input').value;
+                const loadingAnimation = document.querySelector('.lds-ripple');
+                loadingAnimation.style.display = "flex";
+                const cardBodyContent = document.querySelector('.card-body-purple');
+                cardBodyContent.style.visibility = 'hidden';
+                const errorMessage = document.getElementById('error-message');
+                errorMessage.style.display = 'none';
+
+
+                fetch(`/download/${username}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            // Si la respuesta no es exitosa, mostrar el mensaje de error
+                            return response.json().then(data => {
+                                errorMessage.textContent = data.error;
+                                errorMessage.style.display = 'block';
+                                throw new Error(data.error); // Lanzar un error para que no continúe el proceso
+                            });
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log(data)
+                        const profilePic = document.getElementById('profilepic');
+                        profilePic.src = data.profile_pic;
+                        profilePic.alt = 'Foto del Usuario';
+
+                        document.querySelector('.user-username').textContent = "@"+username;
+
+                        const imageContainer = document.getElementById('user-content');
+                        imageContainer.innerHTML = '';
+
+                        // Iterar sobre los posts y crear las tarjetas de imágenes
+                        data.posts.forEach(post => {
+                            // Clonar la plantilla
+                            const cardClone = imageCardTemplate.content.cloneNode(true);
+
+                            // Obtener las referencias a los elementos dentro de la tarjeta clonada
+                            const imageElement = cardClone.querySelector('.card-img-top');
+                            const downloadButton = cardClone.querySelector('p');
+
+                            // Establecer los atributos y contenido con los datos del post
+                            imageElement.src = post.url;
+                            downloadButton.onclick = () => downloadImage(post.url);
+
+                            // Agregar la tarjeta clonada al contenedor de imágenes
+                            imageContainer.appendChild(cardClone);
+                        });
+                        loadingAnimation.style.display = 'none'; // Oculta la animación de carga
+                        cardBodyContent.style.visibility = 'visible'; // Muestra el contenido de la tarjeta
+                    })
+                    .catch(error => {
+                        console.error('Error en la descarga:', error);
+                        loadingAnimation.style.display = 'none'; // Oculta la animación de carga en caso de error
+                        errorMessage.textContent = error;
+                        errorMessage.style.display = 'block'; // Muestra el mensaje de error
+                    });
+            }
+
+        
+            function downloadImage(imageUrl) {
+                // Aquí enviaremos la URL de la imagen al backend Flask para descargar la imagen individual
+                fetch(`/download-image?url=${encodeURIComponent(imageUrl)}`)
+                    .then(response => response.blob())
+                    .then(blob => {
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = 'imagen.jpg';
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        window.URL.revokeObjectURL(url);
+                    })
+                    .catch(error => {
+                        console.error('Error en la descarga de la imagen:', error);
+                    });
+            }
+
+
+            const imageElement = document.getElementById('logo');
+
+            // Llamar a la función que descarga la imagen desde Flask y asignarla al atributo src
+            fetch('/image')
+                .then(response => response.blob())
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    imageElement.src = url;
+                })
+                .catch(error => {
+                    console.error('Error al cargar la imagen:', error);
+                });
+
+        </script>
+    </body>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p class="footer-text">© 2023 Todos los derechos reservados</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</html>
